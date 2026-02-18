@@ -284,6 +284,12 @@ export const useControllerStore = defineStore('controller', () => {
       buttons: [...event.gamepad.buttons.map((button) => button.value)],
     }
 
+    // Custom trigger axis
+    const lt = currentState.buttons[6] ?? 0
+    const rt = currentState.buttons[7] ?? 0
+    const triggerAxis = rt - lt
+    currentState.axes.push(triggerAxis)
+
     // If joystick forwarding is disabled, disable the callback processing
     if (!enableForwarding.value) return
 
